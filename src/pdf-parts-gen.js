@@ -61,7 +61,7 @@ export function getInfoDef(spec, bookTitle, localize) {
 
     content = [
       { text: bookTitle || localize.apiReference, style: ['h2', 'primary', 'right', 'b', 'topMargin1'] },
-      (spec.info.title ? { text: spec.info.title, style: ['title', 'right'] } : ''),
+      (spec.info.title ? { text: spec.info.title, style: ['title', 'right', 'kaiu'] } : ''),
       (spec.info.version ? { text: `${localize.apiVersion}: ${spec.info.version}`, style: ['p', 'b', 'right', 'alternate'] } : ''),
       specInfDescrMarkDef,
       ...contactDef,
@@ -132,7 +132,7 @@ function getParameterTableDef(parameters, paramType, localize, includeExample = 
         { text: paramName, style: ['small', 'mono'] },
         { text: type + format, style: ['small', 'mono'] },
         { text: includeExample ? (param.example ? param.example : (param.examples && param.examples[0] ? param.examples[0] : '')) : '', style: ['small'], margin: [0, 2, 0, 0] },
-        { text: param.description, style: ['small'], margin: [0, 2, 0, 0] },
+        { text: param.description, style: ['small', 'kaiu'], margin: [0, 2, 0, 0] },
       ]);
     }
   } else {
@@ -250,6 +250,7 @@ function getRequestBodyDef(requestBody, schemaStyle, localize, includeExample = 
               table: {
                 headerRows: 1,
                 body: schemaTableTreeDef,
+                widths: [150, 60, '*'],
               },
               layout: rowLinesTableLayout,
               margin: [0, 3, 0, 0],
@@ -317,6 +318,7 @@ function getResponseDef(responses, schemaStyle, localize, includeExample = false
                 headerRows: 1,
                 body: schemaTableTreeDef,
                 dontBreakRows: true,
+                widths: [150, 60, '*'],
               },
               layout: rowLinesTableLayout,
               margin: [10, 3, 0, 0],
@@ -373,7 +375,7 @@ export function getApiDef(spec, filterPath, schemaStyle, localize, includeExampl
       if (path.summary) {
         pathSummaryMarkDef = {
           stack: markdownToPdfmake(path.summary),
-          style: ['primary', 'b'],
+          style: ['primary', 'b', 'kaiu'],
         };
         operationContent.push(pathSummaryMarkDef);
       }
@@ -479,7 +481,6 @@ export function getApiDef(spec, filterPath, schemaStyle, localize, includeExampl
 
   return content;
 }
-
 
 // API List Def
 export function getApiListDef(spec, sectionHeading, localize) {
