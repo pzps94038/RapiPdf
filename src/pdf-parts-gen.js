@@ -333,9 +333,14 @@ function getResponseDef(responses, schemaStyle, localize, includeExample = false
     respDef.push({
       text: [
         { text: `${localize.statusCode} - ${statusCode}: `, style: ['small', 'b'] },
-        { text: responses[statusCode].description, style: ['small'] },
       ],
       margin: [0, 10, 0, 0],
+    });
+    respDef.push({
+      text: [
+        { text: responses[statusCode].description, style: ['small', 'kaiu'] },
+      ],
+    //   margin: [0, 10, 0, 0],
     });
     if (allResponseDefs.length > 0) {
       respDef.push(allResponseDefs);
