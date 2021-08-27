@@ -245,7 +245,6 @@ function getRequestBodyDef(requestBody, schemaStyle, localize, includeExample = 
               { text: localize.type, style: ['sub', 'b', 'alternate'] },
               { text: localize.description, style: ['sub', 'b', 'alternate'] },
             ]);
-
             requestBodyDef.push({
               table: {
                 headerRows: 1,
@@ -363,22 +362,21 @@ export function getApiDef(spec, filterPath, schemaStyle, localize, includeExampl
       }
       pathSeq += 1;
       operationContent.push({
-        text: `${tagSeq + 1}.${pathSeq} ${path.method.toUpperCase()} ${path.path}`,
-        style: ['topMargin3', 'mono', 'p', 'primary', 'b'],
+        text: `${tagSeq + 1}.${pathSeq} ${path.summary}`,
+        style: ['topMargin3', 'kaiu', 'p', 'primary', 'b'],
         tocItem: true,
-        tocStyle: ['small', 'blue', 'mono'],
+        tocStyle: ['small', 'blue', 'kaiu', 'p'],
         tocNumberStyle: ['small', 'blue', 'mono'],
       });
       operationContent.push({ text: '', style: ['topMarginRegular'] });
 
-      let pathSummaryMarkDef; let pathDescrMarkDef;
-      if (path.summary) {
-        pathSummaryMarkDef = {
-          stack: markdownToPdfmake(path.summary),
-          style: ['primary', 'b', 'kaiu'],
-        };
-        operationContent.push(pathSummaryMarkDef);
-      }
+      const pathSummaryMarkDef = {
+        stack: markdownToPdfmake(`${path.method} ${path.path}`),
+        style: ['primary'],
+      };
+      operationContent.push(pathSummaryMarkDef);
+
+      let pathDescrMarkDef;
       if (path.description && path.description.trim() !== path.summary.trim()) {
         pathDescrMarkDef = {
           stack: markdownToPdfmake(path.description),
@@ -449,25 +447,25 @@ export function getApiDef(spec, filterPath, schemaStyle, localize, includeExampl
 
     if (pathSeq > 0) {
       tagSeq += 1;
-      let tagDescrMarkDef;
-      if (tag.description) {
-        tagDescrMarkDef = {
-          stack: markdownToPdfmake(tag.description),
-          style: ['topMarginRegular'],
-        };
-      } else {
-        tagDescrMarkDef = { text: '' };
-      }
+      //   let tagDescrMarkDef;
+      //   if (tag.description) {
+      //     tagDescrMarkDef = {
+      //       stack: markdownToPdfmake(tag.description),
+      //       style: ['topMarginRegular', 'kaiu'],
+      //     };
+      //   } else {
+      //     tagDescrMarkDef = { text: '' };
+      //   }
 
       content.push(
         {
-          text: `${tagSeq}. ${tag.name.toUpperCase()}`,
-          style: ['h2', 'b', 'primary', 'tableMargin'],
+          text: `${tagSeq}. ${tag.description || tag.name}`,
+          style: ['h2', 'b', 'primary', 'tableMargin', 'kaiu'],
           tocItem: true,
-          tocStyle: ['small', 'b'],
+          tocStyle: ['p', 'b', 'kaiu'],
           tocMargin: [0, 10, 0, 0],
         },
-        tagDescrMarkDef,
+        // tagDescrMarkDef,
         operationContent,
         { text: '', pageBreak: 'after' },
       );
@@ -506,7 +504,7 @@ export function getApiListDef(spec, sectionHeading, localize) {
 
     content.push(
       { text: tag.name, style: ['h6', 'b', 'primary', 'tableMargin'], pageBreak: i === 0 ? 'none' : 'after' },
-      { text: tag.description, style: ['p'] },
+      { text: tag.description, style: ['p', 'kaiu'] },
       {
         table: {
           headerRows: 1,

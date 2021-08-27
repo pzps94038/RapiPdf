@@ -347,7 +347,7 @@ export function objectToTableTree(obj, localize, allRows = [], level = 0) {
       const objRow = [
         { text: key, style: ['small', 'b'], margin: [leftMargin, 0, 0, 0] },
         { text: objType, style: ['small', 'mono', 'lightGray'], margin: 0 },
-        { text: '', margin: 0 },
+        { text: obj[key]['::description'], margin: 0, style: ['lightGray', 'kaiu'] },
       ];
       allRows.push(objRow);
       if (obj[key]['::type'] === 'array') {
@@ -358,13 +358,10 @@ export function objectToTableTree(obj, localize, allRows = [], level = 0) {
     } else if (typeof obj[key] === 'string' && (key.startsWith('::') === false)) {
       const typeAndDescr = obj[key].split('~|~');
       const descrStack = generatePropDescription(typeAndDescr, localize);
-
       allRows.push([
         { text: key, style: ['small'], margin: [leftMargin, 0, 0, 0] },
         { text: (typeAndDescr[0] ? typeAndDescr[0].replace('undefined', 'object') : ''), style: ['small', 'mono', 'lightGray'], margin: 0 },
-        {
-          stack: ((descrStack && descrStack.length) > 0 ? descrStack : [{ text: '' }]), margin: 0, style: ['kaiu'],
-        },
+        { stack: ((descrStack && descrStack.length) > 0 ? descrStack : [{ text: '' }]), margin: 0, style: ['kaiu'] },
       ]);
     }
   }
