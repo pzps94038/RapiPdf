@@ -11,6 +11,21 @@ export const rowLinesTableLayout = {
   },
 };
 
+export const normalTableLayout = {
+  hLineWidth(i, node) {
+    return (i === 1 || i === node.table.body.length) ? 1 : 0.5;
+  },
+  vLineWidth(i, node) {
+    return (i === 0 || i === node.table.body[0].length) ? 0.5 : 0.1;
+  },
+  hLineColor(i, node) {
+    return (i === 0 || i === 1 || i === node.table.body.length) ? '#777' : 'lightgray';
+  },
+  vLineColor(i, node) {
+    return (i === 0 || i === node.table.body[0].length) ? '#777' : 'lightgray';
+  },
+};
+
 export const indentGuideLayout = {
   hLineWidth() {
     return 0;

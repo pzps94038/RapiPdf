@@ -40,6 +40,7 @@ export default async function createPdf(specUrl, options) {
     blue: { color: '#005b96' },
     mono: { font: 'RobotoMono', fontSize: 10 },
     monoSub: { font: 'RobotoMono', fontSize: 8 },
+    header: { color: '#005b96', fillColor: '#e5e4e2' },
     chinese: { /* font: 'Kaiu' */ },
   };
 

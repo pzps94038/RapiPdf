@@ -125,7 +125,7 @@ function generatePropDescription(propDescrArray, localize) {
   if (propDescrArray[6]) {
     descrStack.push({
       text: `${propDescrArray[6]}`,
-      style: ['small', 'lightGray', 'chinese'],
+      style: ['small', 'chinese'],
       margin: [0, 3, 0, 0],
     });
   }
@@ -346,8 +346,8 @@ export function objectToTableTree(obj, localize, allRows = [], level = 0) {
       }
       const objRow = [
         { text: key, style: ['small', 'b'], margin: [leftMargin, 0, 0, 0] },
-        { text: objType, style: ['small', 'mono', 'lightGray'], margin: 0 },
-        { text: obj[key]['::description'], margin: 0, style: ['small', 'lightGray', 'chinese'] },
+        { text: objType, style: ['small', 'mono'], margin: 0 },
+        { text: obj[key]['::description'], margin: 0, style: ['small', 'chinese'] },
       ];
       allRows.push(objRow);
       if (obj[key]['::type'] === 'array') {
@@ -360,7 +360,7 @@ export function objectToTableTree(obj, localize, allRows = [], level = 0) {
       const descrStack = generatePropDescription(typeAndDescr, localize);
       allRows.push([
         { text: key, style: ['small'], margin: [leftMargin, 0, 0, 0] },
-        { text: (typeAndDescr[0] ? typeAndDescr[0].replace('undefined', 'object') : ''), style: ['small', 'mono', 'lightGray'], margin: 0 },
+        { text: (typeAndDescr[0] ? typeAndDescr[0].replace('undefined', 'object') : ''), style: ['small', 'mono'], margin: 0 },
         { stack: ((descrStack && descrStack.length) > 0 ? descrStack : [{ text: '' }]), margin: 0 },
       ]);
     }

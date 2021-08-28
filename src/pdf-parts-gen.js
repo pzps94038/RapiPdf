@@ -1,6 +1,6 @@
 import marked from 'marked';
 import htmlToPdfmake from 'html-to-pdfmake';
-import { rowLinesTableLayout } from '@/table-layouts';
+import { rowLinesTableLayout, normalTableLayout } from '@/table-layouts';
 import {
   getTypeInfo,
   schemaInObjectNotation,
@@ -241,9 +241,9 @@ function getRequestBodyDef(requestBody, schemaStyle, localize, includeExample = 
           }
           if (schemaTableTreeDef && schemaTableTreeDef.length > 0 && Array.isArray(schemaTableTreeDef[0]) && schemaTableTreeDef[0].length > 0) {
             schemaTableTreeDef.unshift([
-              { text: localize.name, style: ['sub', 'b', 'alternate'] },
-              { text: localize.type, style: ['sub', 'b', 'alternate'] },
-              { text: localize.description, style: ['sub', 'b', 'alternate'] },
+              { text: localize.name, style: ['small', 'b', 'header'] },
+              { text: localize.type, style: ['small', 'b', 'header'] },
+              { text: localize.description, style: ['small', 'b', 'header'] },
             ]);
             requestBodyDef.push({
               table: {
@@ -251,7 +251,7 @@ function getRequestBodyDef(requestBody, schemaStyle, localize, includeExample = 
                 body: schemaTableTreeDef,
                 widths: [150, 60, '*'],
               },
-              layout: rowLinesTableLayout,
+              layout: normalTableLayout,
               margin: [0, 3, 0, 0],
             });
           }
@@ -274,7 +274,7 @@ function getResponseDef(responses, schemaStyle, localize, includeExample = false
     const allResponseDefs = [];
     for (const contentType in responses[statusCode].content) {
       const responseDef = [
-        { text: `${localize.responseModel} - ${contentType}`, margin: [10, 10, 0, 0], style: ['small', 'b'] },
+        { text: `${localize.responseModel} - ${contentType}`, margin: [0, 10, 0, 0], style: ['small', 'b'] },
       ];
 
       const contentTypeObj = responses[statusCode].content[contentType];
@@ -307,9 +307,9 @@ function getResponseDef(responses, schemaStyle, localize, includeExample = false
           if (schemaTableTreeDef && schemaTableTreeDef.length > 0 && Array.isArray(schemaTableTreeDef[0]) && schemaTableTreeDef[0].length > 0) {
             schemaTableTreeDef.unshift(rootObjectType);
             schemaTableTreeDef.unshift([
-              { text: localize.name, style: ['sub', 'b', 'alternate'] },
-              { text: localize.type, style: ['sub', 'b', 'alternate'] },
-              { text: localize.description, style: ['sub', 'b', 'alternate'] },
+              { text: localize.name, style: ['small', 'b', 'header'] },
+              { text: localize.type, style: ['small', 'b', 'header'] },
+              { text: localize.description, style: ['small', 'b', 'header'] },
             ]);
 
             responseDef.push({
@@ -319,8 +319,8 @@ function getResponseDef(responses, schemaStyle, localize, includeExample = false
                 dontBreakRows: true,
                 widths: [150, 60, '*'],
               },
-              layout: rowLinesTableLayout,
-              margin: [10, 3, 0, 0],
+              layout: normalTableLayout,
+              margin: [0, 3, 0, 0],
             });
           }
         }
@@ -368,9 +368,9 @@ export function getApiDef(spec, filterPath, schemaStyle, localize, includeExampl
       pathSeq += 1;
       operationContent.push({
         text: `${tagSeq + 1}.${pathSeq} ${path.summary}`,
-        style: ['topMargin3', 'chinese', 'p', 'primary', 'b'],
+        style: ['topMargin3', 'p', 'primary', 'b', 'chinese'],
         tocItem: true,
-        tocStyle: ['small', 'blue', 'chinese', 'p'],
+        tocStyle: ['p', 'blue', 'chinese'],
         tocNumberStyle: ['small', 'blue', 'mono'],
       });
       operationContent.push({ text: '', style: ['topMarginRegular'] });
