@@ -19,7 +19,7 @@ export function getTypeInfo(schema) {
         ? 'WRITE-ONLY'
         : '',
     deprecated: schema.deprecated ? 'DEPRECATED' : '',
-    default: schema.default === 0 ? '0' : (schema.default ? schema.default : ''),
+    default: schema.default === 0 ? '0' : schema.default === false ? 'false' : (schema.default ? schema.default : ''),
     description: schema.description ? schema.description : '',
     allowedValues: '',
     constrain: '',

@@ -117,7 +117,7 @@ export default customElements.define('rapi-pdf', class RapiPdf extends HTMLEleme
       statusCode: 'STATUS CODE',
       deprecated: 'DEPRECATED',
       allowed: 'ALLOWED',
-      default: 'DEFAULT',
+      default: '預設值',
       readOnly: 'READ ONLY',
       writeOnly: 'WRITE ONLY',
       enumValues: 'ENUM',
