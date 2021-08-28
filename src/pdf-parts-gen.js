@@ -61,7 +61,7 @@ export function getInfoDef(spec, bookTitle, localize) {
 
     content = [
       { text: bookTitle || localize.apiReference, style: ['h2', 'primary', 'right', 'b', 'topMargin1'] },
-      (spec.info.title ? { text: spec.info.title, style: ['title', 'right', 'kaiu'] } : ''),
+      (spec.info.title ? { text: spec.info.title, style: ['title', 'right', 'chinese'] } : ''),
       (spec.info.version ? { text: `${localize.apiVersion}: ${spec.info.version}`, style: ['p', 'b', 'right', 'alternate'] } : ''),
       specInfDescrMarkDef,
       ...contactDef,
@@ -132,7 +132,7 @@ function getParameterTableDef(parameters, paramType, localize, includeExample = 
         { text: paramName, style: ['small', 'mono'] },
         { text: type + format, style: ['small', 'mono'] },
         { text: includeExample ? (param.example ? param.example : (param.examples && param.examples[0] ? param.examples[0] : '')) : '', style: ['small'], margin: [0, 2, 0, 0] },
-        { text: param.description, style: ['small', 'kaiu'], margin: [0, 2, 0, 0] },
+        { text: param.description, style: ['small', 'chinese'], margin: [0, 2, 0, 0] },
       ]);
     }
   } else {
@@ -338,7 +338,7 @@ function getResponseDef(responses, schemaStyle, localize, includeExample = false
     });
     respDef.push({
       text: [
-        { text: responses[statusCode].description, style: ['small', 'kaiu'] },
+        { text: responses[statusCode].description, style: ['small', 'chinese'] },
       ],
     //   margin: [0, 10, 0, 0],
     });
@@ -368,9 +368,9 @@ export function getApiDef(spec, filterPath, schemaStyle, localize, includeExampl
       pathSeq += 1;
       operationContent.push({
         text: `${tagSeq + 1}.${pathSeq} ${path.summary}`,
-        style: ['topMargin3', 'kaiu', 'p', 'primary', 'b'],
+        style: ['topMargin3', 'chinese', 'p', 'primary', 'b'],
         tocItem: true,
-        tocStyle: ['small', 'blue', 'kaiu', 'p'],
+        tocStyle: ['small', 'blue', 'chinese', 'p'],
         tocNumberStyle: ['small', 'blue', 'mono'],
       });
       operationContent.push({ text: '', style: ['topMarginRegular'] });
@@ -456,7 +456,7 @@ export function getApiDef(spec, filterPath, schemaStyle, localize, includeExampl
       //   if (tag.description) {
       //     tagDescrMarkDef = {
       //       stack: markdownToPdfmake(tag.description),
-      //       style: ['topMarginRegular', 'kaiu'],
+      //       style: ['topMarginRegular', 'chinese'],
       //     };
       //   } else {
       //     tagDescrMarkDef = { text: '' };
@@ -465,9 +465,9 @@ export function getApiDef(spec, filterPath, schemaStyle, localize, includeExampl
       content.push(
         {
           text: `${tagSeq}. ${tag.description || tag.name}`,
-          style: ['h2', 'b', 'primary', 'tableMargin', 'kaiu'],
+          style: ['h2', 'b', 'primary', 'tableMargin', 'chinese'],
           tocItem: true,
-          tocStyle: ['p', 'b', 'kaiu'],
+          tocStyle: ['p', 'b', 'chinese'],
           tocMargin: [0, 10, 0, 0],
         },
         // tagDescrMarkDef,
@@ -509,7 +509,7 @@ export function getApiListDef(spec, sectionHeading, localize) {
 
     content.push(
       { text: tag.name, style: ['h6', 'b', 'primary', 'tableMargin'], pageBreak: i === 0 ? 'none' : 'after' },
-      { text: tag.description, style: ['p', 'kaiu'] },
+      { text: tag.description, style: ['p', 'chinese'] },
       {
         table: {
           headerRows: 1,

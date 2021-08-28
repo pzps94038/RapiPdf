@@ -40,7 +40,7 @@ export default async function createPdf(specUrl, options) {
     blue: { color: '#005b96' },
     mono: { font: 'RobotoMono', fontSize: 10 },
     monoSub: { font: 'RobotoMono', fontSize: 8 },
-    kaiu: { font: 'Kaiu' },
+    chinese: { /* font: 'Kaiu' */ },
   };
 
   const allContent = [];
@@ -94,15 +94,9 @@ export default async function createPdf(specUrl, options) {
   };
 
   pdfMake.fonts = {
-    Kaiu: {
-      normal: 'kaiu.ttf',
-      bold: 'kaiu.ttf',
-      italics: 'kaiu.ttf',
-      bolditalics: 'kaiu.ttf',
-    },
     Roboto: {
-      normal: 'Roboto-Regular.ttf',
-      bold: 'Roboto-Medium.ttf',
+      normal: 'Roboto-Regular.woff2',
+      bold: 'Roboto-Medium.woff2',
       italics: 'Roboto-Italic.ttf',
       bolditalics: 'Roboto-Medium.ttf',
     },
