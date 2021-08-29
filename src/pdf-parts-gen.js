@@ -97,6 +97,7 @@ export function getSecurityDef(spec, localize) {
       table: {
         headerRows: 1,
         body: tableContent,
+        widths: [120, 80, '*'],
       },
       layout: rowLinesTableLayout,
       style: 'tableMargin',
