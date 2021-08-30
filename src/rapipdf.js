@@ -94,7 +94,7 @@ export default customElements.define('rapi-pdf', class RapiPdf extends HTMLEleme
     }
 
     this.localize = {
-      index: 'INDEX',
+      index: '目錄索引',
       api: 'API',
       apiList: 'API List',
       apiReference: 'API Reference',
@@ -104,9 +104,9 @@ export default customElements.define('rapi-pdf', class RapiPdf extends HTMLEleme
       email: 'EMAIL',
       url: 'URL',
       termsOfService: 'Terms of service',
-      securityAndAuthentication: 'Security and Authentication',
+      securityAndAuthentication: 'HTTP Header: Authentication',
       securitySchemes: 'SECURITY SCHEMES',
-      key: 'KEY',
+      key: '認證方式',
       type: '型別',
       example: 'EXAMPLE',
       description: '說明',

@@ -83,7 +83,7 @@ export function getSecurityDef(spec, localize) {
     content.push({ text: localize.securityAndAuthentication, style: ['h3', 'b', 'primary', 'right', 'topMargin3'] });
     content.push({ text: localize.securitySchemes, style: ['b', 'tableMargin'] });
     const tableContent = [
-      [{ text: localize.key, style: ['small', 'b'] }, { text: localize.type, style: ['small', 'b'] }, { text: localize.description, style: ['small', 'b'] }],
+      [{ text: localize.key, style: ['small', 'b', 'header'] }, { text: localize.type, style: ['small', 'b', 'header'] }, { text: localize.description, style: ['small', 'b', 'header'] }],
     ];
     for (const key in spec.securitySchemes) {
       tableContent.push([
@@ -99,7 +99,7 @@ export function getSecurityDef(spec, localize) {
         body: tableContent,
         widths: [120, 80, '*'],
       },
-      layout: rowLinesTableLayout,
+      layout: normalTableLayout,
       style: 'tableMargin',
       pageBreak: 'after',
     });
@@ -377,7 +377,7 @@ export function getApiDef(spec, filterPath, schemaStyle, localize, includeExampl
       operationContent.push({ text: '', style: ['topMarginRegular'] });
 
       const pathSummaryMarkDef = {
-        stack: markdownToPdfmake(`${path.method} ${path.path}`),
+        stack: markdownToPdfmake(`${path.method} ${path.path} ${path.security ? ' + '.concat(path.security.map((x) => Object.keys(x)[0]).join()) : ''}`),
         style: ['primary'],
       };
       operationContent.push(pathSummaryMarkDef);
