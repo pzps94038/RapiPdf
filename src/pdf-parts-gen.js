@@ -108,31 +108,32 @@ export function getSecurityDef(spec, localize) {
 }
 
 // Parameter Table
-function getParameterTableDef(parameters, paramType, localize, includeExample = false) {
+function getParameterTableDef(parameters, paramType, localize/* , includeExample = false */) {
   // let filteredParams= parameters ? parameters.filter(param => param.in === paramType):[];
   if (parameters === undefined || parameters.length === 0) {
     return;
   }
   const tableContent = [
     [
-      { text: localize.name, style: ['sub', 'b', 'alternate'] },
-      { text: localize.type, style: ['sub', 'b', 'alternate'] },
-      { text: includeExample ? localize.example : '', style: ['sub', 'b', 'alternate'] },
-      { text: localize.description, style: ['sub', 'b', 'alternate'] },
+      { text: localize.name, style: ['small', 'b', 'alternate', 'header'] },
+      { text: localize.type, style: ['small', 'b', 'alternate', 'header'] },
+      //   { text: includeExample ? localize.example : '', style: ['sub', 'b', 'alternate', 'header'] },
+      { text: localize.description, style: ['small', 'b', 'alternate', 'header'] },
     ],
   ];
   if (paramType === 'FORM DATA') {
     for (const paramName in parameters) {
       const param = parameters[paramName];
       let { type } = param;
-      const format = param.format === 'binary' ? '(binary)' : '';
+      const format = param.format === 'binary' ? '(binary)' : null;
       if (type === 'array') {
         type = `array of ${param.items.type}`;
       }
       tableContent.push([
         { text: paramName, style: ['small', 'mono'] },
-        { text: type + format, style: ['small', 'mono'] },
-        { text: includeExample ? (param.example ? param.example : (param.examples && param.examples[0] ? param.examples[0] : '')) : '', style: ['small'], margin: [0, 2, 0, 0] },
+        { text: format || type, style: ['small', 'mono'] },
+        // { text: type + format, style: ['small', 'mono'] },
+        // { text: includeExample ? (param.example ? param.example : (param.examples && param.examples[0] ? param.examples[0] : '')) : '', style: ['small'], margin: [0, 2, 0, 0] },
         { text: param.description, style: ['small', 'chinese'], margin: [0, 2, 0, 0] },
       ]);
     }
@@ -161,7 +162,7 @@ function getParameterTableDef(parameters, paramType, localize, includeExample = 
             (paramSchema.pattern ? { text: `${localize.pattern}: ${paramSchema.pattern}`, style: ['small', 'gray'] } : ''),
           ],
         },
-        { text: includeExample ? (param.example ? param.example : (param.examples && param.examples[0] ? param.examples[0] : '')) : '', style: ['small'], margin: [0, 2, 0, 0] },
+        // { text: includeExample ? (param.example ? param.example : (param.examples && param.examples[0] ? param.examples[0] : '')) : '', style: ['small'], margin: [0, 2, 0, 0] },
         { text: param.description, style: ['small'], margin: [0, 2, 0, 0] },
       ]);
     });
@@ -173,10 +174,11 @@ function getParameterTableDef(parameters, paramType, localize, includeExample = 
       table: {
         headerRows: 1,
         dontBreakRows: true,
-        widths: ['auto', 'auto', includeExample ? 'auto' : 0, '*'],
+        widths: [150, 60, '*'],
+        // widths: [150, 80, includeExample ? 'auto' : 0, '*'],
         body: tableContent,
       },
-      layout: rowLinesTableLayout,
+      layout: normalTableLayout,
       style: 'tableMargin',
     },
   ];
