@@ -212,6 +212,7 @@ function getRequestBodyDef(requestBody, schemaStyle, localize, includeExample = 
   const content = [];
   let formParamDef;
   for (const contentType in requestBody.content) {
+    if (contentType !== 'application/json') continue;
     const contentTypeObj = requestBody.content[contentType];
     const requestBodyDef = [
       { text: `${localize.requestBody} - ${contentType}`, margin: [0, 10, 0, 0], style: ['small', 'b'] },
@@ -276,6 +277,7 @@ function getResponseDef(responses, schemaStyle, localize, includeExample = false
   for (const statusCode in responses) {
     const allResponseDefs = [];
     for (const contentType in responses[statusCode].content) {
+      if (contentType !== 'application/json') continue;
       const responseDef = [
         { text: `${localize.responseModel} - ${contentType}`, margin: [0, 10, 0, 0], style: ['small', 'b'] },
       ];
