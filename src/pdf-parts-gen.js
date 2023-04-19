@@ -212,7 +212,7 @@ function getRequestBodyDef(requestBody, schemaStyle, localize, includeExample = 
   const content = [];
   let formParamDef;
   for (const contentType in requestBody.content) {
-    if (contentType !== 'application/json') continue;
+    if (contentType !== 'application/json' && !contentType.includes('form') && !contentType.includes('multipart-form')) continue;
     const contentTypeObj = requestBody.content[contentType];
     const requestBodyDef = [
       { text: `${localize.requestBody} - ${contentType}`, margin: [0, 10, 0, 0], style: ['small', 'b'] },
