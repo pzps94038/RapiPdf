@@ -1,0 +1,36 @@
+name: Node.js CI
+
+on:
+    pull_request:
+        branches: ['main']
+    push:
+        branches: ['main']
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [16.x]
+        steps:
+            - uses: actions/checkout@v3
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: 'npm'
+            - run: npm ci
+            - run: npm run build
+            - name: Upload build artifact
+              if: github.ref == 'refs/heads/main'
+              uses: actions/upload-artifact@v2
+              with:
+                  name: "Swagger產生器"
+                  path: dist
+                  retention-days: 1
+            - name: Deploy to GitHub Pages
+              if: github.ref == 'refs/heads/main'
+              uses: JamesIves/github-pages-deploy-action@4.1.5
+              with:
+                branch: gh-pages
+                folder: dist
+                token: ${{ secrets.TOKEN }}
